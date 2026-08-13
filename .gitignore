@@ -8,3 +8,11 @@ __pyache__/
 
 #Arquivos de ambiente (caso usem futuramente)
 .env
+
+#IMPORTANTE!!!
+#1. phyton -m venv ven
+#2. .venv\Scripts\activate
+#3. pip install -r requirements.txt
+#4. abrir xampp e importar bd
+#5. uvicorn main:app --reload
+#6. pip freeze > requirements.txt 
