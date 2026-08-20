@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database import Base, engine, get_db
 from models import ProdutoDB
@@ -27,7 +27,7 @@ def obter_produto(produto_id: int, db: Session = Depends(get_db)):
     produto = db.query(ProdutoDB).filter(ProdutoDB.id == produto_id).first()
     if produto is None:
         raise HTTPException(status_code=404, detail='Produto não encontrado')
-        return produto
+    return produto
 
 # DELETE /produtos/{id} -> remove um produto do banco de dados
 @app.delete('/produtos/{produto_id}', status_code=204)
@@ -50,7 +50,7 @@ Session = Depends(get_db)):
         produto.quantidade = dados.quantidade
         db.commit()
         db.refresh(produto)
-        return produto
+    return produto
 
 @app.get('/produtos', response_model=list[ProdutoResponse])
 def listar_produtos(db: Session = Depends(get_db)):
@@ -72,7 +72,7 @@ def obter_livro(livro_id: int, db: Session = Depends(get_db)):
     livro = db.query(LivroDB).filter(LivroDB.id == livro_id).first()
     if livro is None:
         raise HTTPException(status_code=404, detail='Livro não encontrado')
-        return livro
+    return livro
 
 # DELETE /livros/{id} -> remove um livro do banco de dados
 @app.delete('/livros/{livro_id}', status_code=204)
@@ -95,7 +95,7 @@ Session = Depends(get_db)):
         livro.quantidade = dados.quantidade
         db.commit()
         db.refresh(livro)
-        return livro
+    return livro
 
 @app.get('/livros', response_model=list[LivroResponse])
 def listar_livros(db: Session = Depends(get_db)):
