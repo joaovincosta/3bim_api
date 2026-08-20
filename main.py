@@ -35,8 +35,8 @@ def remover_produto(produto_id: int, db: Session = Depends(get_db)):
     produto = db.query(ProdutoDB).filter(ProdutoDB.id == produto_id).first()
     if produto is None:
         raise HTTPException(status_code=404, detail='Produto não encontrado')
-        db.delete(produto)
-        db.commit()
+    db.delete(produto)
+    db.commit()
 
 # PUT /produtos/{id} -> atualiza um produto existente no banco
 @app.put('/produtos/{produto_id}', response_model=ProdutoResponse)
@@ -80,8 +80,8 @@ def remover_livro(livro_id: int, db: Session = Depends(get_db)):
     livro = db.query(LivroDB).filter(LivroDB.id == livro_id).first()
     if livro is None:
         raise HTTPException(status_code=404, detail='Livro não encontrado')
-        db.delete(livro)
-        db.commit()
+    db.delete(livro)
+    db.commit()
 
 # PUT /livros/{id} -> atualiza um livro existente no banco
 @app.put('/livros/{livro_id}', response_model=LivroResponse)
@@ -90,11 +90,11 @@ Session = Depends(get_db)):
     livro = db.query(LivroDB).filter(LivroDB.id == livro_id).first()
     if livro is None:
         raise HTTPException(status_code=404, detail='Livro não encontrado')
-        livro.nome = dados.nome
-        livro.preco = dados.preco
-        livro.quantidade = dados.quantidade
-        db.commit()
-        db.refresh(livro)
+    livro.nome = dados.nome
+    livro.preco = dados.preco
+    livro.quantidade = dados.quantidade
+    db.commit()
+    db.refresh(livro)
     return livro
 
 @app.get('/livros', response_model=list[LivroResponse])
