@@ -10,8 +10,8 @@ __pyache__/
 .env
 
 #IMPORTANTE!!!
-#1. phyton -m venv ven
-#2. .venv\Scripts\activate
+#1. python -m venv venv
+#2. .\venv\Scripts\activate
 #3. pip install -r requirements.txt
 #4. abrir xampp e importar bd
 #5. uvicorn main:app --reload
